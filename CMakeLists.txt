@@ -10,9 +10,9 @@ project(join_server VERSION 0.0.${BUILD})
 
 find_package(Threads REQUIRED)
 
-add_executable(join_server main.cpp command_handler.h server.cpp server.h)
+add_executable(${PROJECT_NAME} main.cpp command_handler.h server.cpp server.h database.h database.cpp)
 
-set_target_properties(join_server PROPERTIES
+set_target_properties(${PROJECT_NAME} PROPERTIES
   CXX_STANDARD 14
   CXX_STANDARD_REQUIRED ON
   COMPILE_OPTIONS -Wpedantic -Wall -Wextra
@@ -20,7 +20,7 @@ set_target_properties(join_server PROPERTIES
 
 target_link_libraries(${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT})
 
-install(TARGETS join_server RUNTIME DESTINATION bin)
+install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION bin)
 
 set(CPACK_GENERATOR DEB)
 
