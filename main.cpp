@@ -13,8 +13,8 @@ bool parseArg(int argc, char* argv[], uint16_t& parsed)
 
     try
     {
-        int arg = std::stoi(argv[1]);
-        if (parsed < 1 || parsed > 65535) {
+        const int arg = std::stoi(argv[1]);
+        if (arg < 1 || arg > 65535) {
             std::cerr << "invalid argument <port>";
             return false;
         }
