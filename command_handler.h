@@ -8,95 +8,93 @@ namespace hw13 {
 class CommandHandler
 {
 public:
-  CommandHandler() = default;
-  virtual ~CommandHandler() = default;
+    CommandHandler() = default;
+    virtual ~CommandHandler() = default;
 
-  void add(CommandHandler& handler)
-  {
-    if (m_next)
-      m_next->add(handler);
-    else
-      m_next = &handler;
-  }
+    void add(CommandHandler& handler)
+    {
+        if (m_next)
+            m_next->add(handler);
+        else
+            m_next = &handler;
+    }
 
-  virtual void exec(const std::string& command)
-  {
-    if (m_next)
-      m_next->exec(command);
-  }
+    virtual std::string exec(const std::string& command)
+    {
+        if (m_next)
+            return m_next->exec(command);
+
+        return {};
+    }
 
 private:
-  CommandHandler* m_next{};
+    CommandHandler* m_next{};
 };
 
 class InsertHandler : public CommandHandler
 {
 public:
-  void exec(const std::string& command) override
-  {
-    if (command.find("INSERT") != 0) {
-      CommandHandler::exec(command);
-      return;
-    }
+    std::string exec(const std::string& command) override
+    {
+        if (command.find("INSERT") != 0)
+            return CommandHandler::exec(command);
 
-    //TODO handle INSERT
-    std::cout << "handle insert\n";
-  }
+        //TODO handle INSERT
+        std::cout << "handle insert\n";
+        return "OK\n";
+    }
 };
 
 class TruncateHandler : public CommandHandler
 {
 public:
-  void exec(const std::string& command) override
-  {
-    if (command.find("TRUNCATE") != 0) {
-      CommandHandler::exec(command);
-      return;
-    }
+    std::string exec(const std::string& command) override
+    {
 
-    //TODO handle TRUNCATE
-      std::cout << "handle truncate\n";
-  }
+        if (command.find("TRUNCATE") != 0)
+            return CommandHandler::exec(command);
+
+        //TODO handle TRUNCATE
+        std::cout << "handle truncate\n";
+        return "OK\n";
+    }
 };
 
 class IntersectionHandler : public CommandHandler
 {
-  public:
-    void exec(const std::string& command) override
+public:
+    std::string exec(const std::string& command) override
     {
-      if (command.find("INTERSECTION") != 0) {
-        CommandHandler::exec(command);
-        return;
-      }
+        if (command.find("INTERSECTION") != 0)
+            return CommandHandler::exec(command);
 
-      //TODO handle INTERSECTION
+        //TODO handle INTERSECTION
         std::cout << "handle intersection\n";
+        return "OK\n";
     }
 };
 
 class SymmetricDifferenceHandler : public CommandHandler
 {
-  public:
-    void exec(const std::string& command) override
+public:
+    std::string exec(const std::string& command) override
     {
-      if (command.find("SYMMETRIC_DIFFERENCE") != 0) {
-        CommandHandler::exec(command);
-        return;
-      }
+        if (command.find("SYMMETRIC_DIFFERENCE") != 0)
+            return CommandHandler::exec(command);
 
-      //TODO handle SYMMETRIC_DIFFERENCE
+        //TODO handle SYMMETRIC_DIFFERENCE
         std::cout << "handle symmetric difference\n";
+        return "OK\n";
     }
 };
 
 class UnknownCommandHandler : public CommandHandler
 {
-  public:
-    void exec(const std::string&) override
+public:
+    std::string exec(const std::string&) override
     {
-      //TODO handle unknown command
-        std::cout << "error: unknown command\n";
+        return "ERR unknown command\n";
     }
 };
 
-}
+} // hw13
