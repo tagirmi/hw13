@@ -8,13 +8,17 @@ endif()
 
 project(join_server VERSION 0.0.${BUILD})
 
-add_executable(join_server main.cpp command_handler.h)
+find_package(Threads REQUIRED)
+
+add_executable(join_server main.cpp command_handler.h server.cpp server.h)
 
 set_target_properties(join_server PROPERTIES
   CXX_STANDARD 14
   CXX_STANDARD_REQUIRED ON
   COMPILE_OPTIONS -Wpedantic -Wall -Wextra
 )
+
+target_link_libraries(${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT})
 
 install(TARGETS join_server RUNTIME DESTINATION bin)
 
