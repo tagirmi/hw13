@@ -10,7 +10,7 @@ project(join_server VERSION 0.0.${BUILD})
 
 find_package(Threads REQUIRED)
 
-add_executable(${PROJECT_NAME} main.cpp command_handler.h server.cpp server.h database.h database.cpp)
+add_executable(${PROJECT_NAME} main.cpp command_handler.h server.cpp server.h database.h database.cpp util.h util.cpp)
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
   CXX_STANDARD 14
