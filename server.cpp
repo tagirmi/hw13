@@ -69,7 +69,8 @@ void hw13::Server::run()
                         continue;
 
                     for (const auto& i : lines) {
-                        handler.exec(i);
+                        std::string result = handler.exec(i);
+                        asio::write(sock, asio::buffer(result));
                     }
                 }
                 catch (const std::exception &e) {
