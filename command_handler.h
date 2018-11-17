@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <iostream>
 
 namespace hw13 {
 
@@ -25,7 +26,7 @@ public:
   }
 
 private:
-  CommandHandler* m_next;
+  CommandHandler* m_next{};
 };
 
 class InsertHandler : public CommandHandler
@@ -39,6 +40,7 @@ public:
     }
 
     //TODO handle INSERT
+    std::cout << "handle insert\n";
   }
 };
 
@@ -53,6 +55,7 @@ public:
     }
 
     //TODO handle TRUNCATE
+      std::cout << "handle truncate\n";
   }
 };
 
@@ -67,10 +70,11 @@ class IntersectionHandler : public CommandHandler
       }
 
       //TODO handle INTERSECTION
+        std::cout << "handle intersection\n";
     }
 };
 
-class SymmetricDifferenceHandler : CommandHandler
+class SymmetricDifferenceHandler : public CommandHandler
 {
   public:
     void exec(const std::string& command) override
@@ -81,15 +85,17 @@ class SymmetricDifferenceHandler : CommandHandler
       }
 
       //TODO handle SYMMETRIC_DIFFERENCE
+        std::cout << "handle symmetric difference\n";
     }
 };
 
-class UnknownCommandHandler : CommandHandler
+class UnknownCommandHandler : public CommandHandler
 {
   public:
     void exec(const std::string&) override
     {
       //TODO handle unknown command
+        std::cout << "error: unknown command\n";
     }
 };
 
