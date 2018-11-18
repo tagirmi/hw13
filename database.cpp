@@ -1,31 +1,27 @@
 #include "database.h"
 
-bool hw13::Database::insert(const std::string &table, const std::tuple<int, std::string> &row)
+bool hw13::Database::insert(const std::string& table, const std::tuple<int, std::string>& row, std::string& error)
+{
+    if (table != "A" && table != "B") {
+        error = "";
+        return false;
+    }
+
+
+    return true;
+}
+
+bool hw13::Database::truncate(const std::string& table, std::string& error)
 {
     return false;
 }
 
-bool hw13::Database::truncate(const std::string &table)
+bool hw13::Database::intersection(Result& result, std::string& error)
 {
     return false;
 }
 
-bool hw13::Database::intersection()
+bool hw13::Database::symmetric_difference(Result& result, std::string& error)
 {
     return false;
-}
-
-bool hw13::Database::symmetric_difference()
-{
-    return false;
-}
-
-std::string hw13::Database::getError()
-{
-    return m_error;
-}
-
-const hw13::Database::Result &hw13::Database::getResult()
-{
-    return m_result;
 }

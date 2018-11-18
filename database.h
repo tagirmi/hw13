@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <tuple>
+#include <unordered_map>
 
 namespace hw13 {
 
@@ -21,17 +22,16 @@ public:
         return db;
     }
 
-    bool insert(const std::string& table, const std::tuple<int, std::string>& row);
-    bool truncate(const std::string& table);
-    bool intersection();
-    bool symmetric_difference();
-
-    std::string getError();
-    const Result& getResult();
+    bool insert(const std::string& table, const std::tuple<int, std::string>& row, std::string& error);
+    bool truncate(const std::string& table, std::string& error);
+    bool intersection(Result& result, std::string& error);
+    bool symmetric_difference(Result& result, std::string& error);
 
 private:
-    std::string m_error{};
-    Result m_result{};
+    using Table = std::unordered_map<int, std::string>;
+
+    Table m_tableA{};
+    Table m_tableB{};
 };
 
 } // hw13

@@ -80,8 +80,9 @@ public:
 
         auto& db = Database::instance();
 
-        if (!db.insert(args[1], std::make_tuple(id, args[3])))
-            return error(db.getError());
+        std::string errorMessage{};
+        if (!db.insert(args[1], std::make_tuple(id, args[3]), errorMessage))
+            return error(errorMessage);
 
         return ok();
     }
@@ -123,8 +124,9 @@ public:
 
         auto& db = Database::instance();
 
-        if (!db.truncate(args[1]))
-            return error(db.getError());
+        std::string errorMessage{};
+        if (!db.truncate(args[1], errorMessage))
+            return error(errorMessage);
 
         return ok();
     }
@@ -145,10 +147,12 @@ public:
 
         auto& db = Database::instance();
 
-        if (!db.intersection())
-            return error(db.getError());
+        Database::Result result{};
+        std::string errorMessage{};
+        if (!db.intersection(result, errorMessage))
+            return error(errorMessage);
 
-        return ok(db.getResult());
+        return ok(result);
     }
 };
 
@@ -167,10 +171,12 @@ public:
 
         auto& db = Database::instance();
 
-        if (!db.symmetric_difference())
-            return error(db.getError());
+        Database::Result result{};
+        std::string errorMessage{};
+        if (!db.symmetric_difference(result, errorMessage))
+            return error(errorMessage);
 
-        return ok(db.getResult());
+        return ok(result);
     }
 };
 
