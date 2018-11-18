@@ -81,7 +81,7 @@ public:
         auto& db = Database::instance();
 
         std::string errorMessage{};
-        if (!db.insert(args[1], std::make_tuple(id, args[3]), errorMessage))
+        if (!db.insert(args[1], std::make_pair(id, args[3]), errorMessage))
             return error(errorMessage);
 
         return ok();
